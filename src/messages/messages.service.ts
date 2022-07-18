@@ -1,24 +1,19 @@
-import { MessagesRepository } from "./messages.repository";
+import { Injectable } from '@nestjs/common';
+import { MessagesRepository } from './messages.repository';
 
+@Injectable()
 export class MessagesService {
+  constructor(public messagesRepo: MessagesRepository) {}
 
-    messagesRepo: MessagesRepository;
+  findOne(id: string) {
+    return this.messagesRepo.findOne(id);
+  }
 
-    constructor(){
-        //service is creating its own dependencies
-        this.messagesRepo = new MessagesRepository();
-    }
+  findAll() {
+    return this.messagesRepo.findAll();
+  }
 
-    findOne(id: string){
-        return this.messagesRepo.findOne(id);
-    }
-
-    findAll(){
-        return this.messagesRepo.findAll();
-    }
-
-    create(contnet: string){
-        return this.messagesRepo.create(contnet);
-    }
-
+  create(contnet: string) {
+    return this.messagesRepo.create(contnet);
+  }
 }
